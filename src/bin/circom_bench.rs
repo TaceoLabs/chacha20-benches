@@ -166,8 +166,71 @@ fn main() -> eyre::Result<()> {
         warm_up_e2e.subsec_micros()
     );
     tracing::info!("===========================");
+    let net = do_batch_size(
+        5,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
+    let net = do_batch_size(
+        10,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
+    let net = do_batch_size(
+        15,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
+    let net = do_batch_size(
+        20,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
+    let net = do_batch_size(
+        25,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
+    let net = do_batch_size(
+        30,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
+    let net = do_batch_size(
+        100,
+        circuit.clone(),
+        Arc::clone(&zkey),
+        &vk,
+        &input_share,
+        net,
+    )?;
+
     let _ = do_batch_size(
-        config.batch_size,
+        1000,
         circuit.clone(),
         Arc::clone(&zkey),
         &vk,
