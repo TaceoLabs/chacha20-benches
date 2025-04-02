@@ -38,7 +38,7 @@ fn do_batch_size(
     input_share: &Rep3SharedInput<ark_bn254::Fr>,
     net: Rep3MpcNet,
 ) -> eyre::Result<Rep3MpcNet> {
-    tracing::info!("doing batch {batch_size}..");
+    tracing::info!("doing batch {batch_size} ..");
     let batch =
         BatchedSharedInput::try_from(vec![input_share.clone(); batch_size]).expect("can do batch");
 
@@ -67,12 +67,12 @@ fn do_batch_size(
         Groth16::verify(vk, &proof, &public_input).context("got invalid proof")?;
     }
     tracing::info!(
-        "wtns extension took: {}.{:0>6}",
+        "batch wtns ext took:         {}.{:0>6} s",
         wtns.as_secs(),
         wtns.subsec_micros()
     );
     tracing::info!(
-        "E2e (with proof) took: {}.{:0>6}",
+        "batch e2e (with proof) took: {}.{:0>6} s",
         e2e.as_secs(),
         e2e.subsec_micros()
     );
@@ -151,17 +151,17 @@ fn main() -> eyre::Result<()> {
     tracing::info!("Done!");
     tracing::info!("These are the averaged times over the 5 warm up runs:");
     tracing::info!(
-        "wtns extension took: {}.{:0>6}",
+        "warm up wtns ext took:       {}.{:0>6} s",
         warm_up_wtns.as_secs(),
         warm_up_wtns.subsec_micros()
     );
     tracing::info!(
-        "warm_up_proof  took: {}.{:0>6}",
+        "warm up proof took:          {}.{:0>6} s",
         warm_up_proof.as_secs(),
         warm_up_proof.subsec_micros()
     );
     tracing::info!(
-        "e2e took: {}.{:0>6}",
+        "warm up e2e took:            {}.{:0>6} s",
         warm_up_e2e.as_secs(),
         warm_up_e2e.subsec_micros()
     );
