@@ -1,8 +1,13 @@
 use clap::Parser;
 use co_circom::NetworkConfig;
 use mpc_net::config::NetworkConfigFile;
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
+#[derive(Debug, Clone, Serialize, Deserialize, Eq, PartialEq, PartialOrd, Ord, Hash)]
+pub struct PartyTomlFile {
+    pub network: NetworkConfigFile,
+}
 #[derive(Parser)]
 pub struct CircomConfig {
     /// The batch size
@@ -28,7 +33,8 @@ pub struct CircomConfig {
 impl CircomConfig {
     pub fn network_config(&self) -> eyre::Result<NetworkConfig> {
         let toml = std::fs::read_to_string(&self.network_config)?;
-        let config_file = toml::from_str::<NetworkConfigFile>(&toml)?;
+        let party_toml = toml::from_str::<PartyTomlFile>(&toml)?;
+        let config_file = party_toml.network;
         tracing::info!(
             "reading from config file: {}",
             self.network_config.display()
@@ -62,7 +68,8 @@ pub struct NoirConfig {
 impl NoirConfig {
     pub fn network_config(&self) -> eyre::Result<NetworkConfig> {
         let toml = std::fs::read_to_string(&self.network_config)?;
-        let config_file = toml::from_str::<NetworkConfigFile>(&toml)?;
+        let party_toml = toml::from_str::<PartyTomlFile>(&toml)?;
+        let config_file = party_toml.network;
         tracing::info!(
             "reading from config file: {}",
             self.network_config.display()

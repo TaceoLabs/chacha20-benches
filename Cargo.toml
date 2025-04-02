@@ -22,6 +22,7 @@ co-builder = { git="https://github.com/TaceoLabs/co-snarks", rev = "8b81675" }
 co-acvm = { git="https://github.com/TaceoLabs/co-snarks", rev = "8b81675" }
 ultrahonk = { git="https://github.com/TaceoLabs/co-snarks", rev = "8b81675" }
 
+serde = { version = "1.0.193", features = ["derive"] }
 serde_json = "1.0.140"
 toml = "0.8.20"
 tracing = "0.1"

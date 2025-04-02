@@ -798,6 +798,7 @@ dependencies = [
  "mpc-core",
  "mpc-net",
  "rustls",
+ "serde",
  "serde_json",
  "toml 0.8.20",
  "tracing",
